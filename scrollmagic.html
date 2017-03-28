@@ -1,0 +1,57 @@
+<!DOCTYPE html />
+<html>
+<head>
+    <title>Drawing images with sequence</title>
+    <meta charset="UTF-8" />
+    
+    <script type="text/javascript">
+        var canvas;
+        var context;
+        var photo;
+        var timer;
+        var count = 0;
+
+        function StartAnimation() {
+            img = new Image();
+            canvas = document.getElementById("Canvas1");
+            context = canvas.getContext("2d");
+            AnimateNow();
+            img.src = "volcano_1/pic_";
+        }
+
+        function AnimateNow() {
+            count++;
+            img.src ="volcano_1/pic_" + count + '.PNG';
+            context.drawImage(img, 2, 2, 595, 395);
+            
+            timer = setTimeout(AnimateNow, 300);
+            
+            if (count == 8) {
+                StopAnimation();
+            }
+        }
+
+        function StopAnimation() {
+            count = 0;
+            clearTimeout(timer);
+        }
+
+        function ResetCanvas() {
+            count = 0;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+    
+</head>
+<body>
+    
+    <canvas id="Canvas1" width="600" height="400" style="border:5px solid green;">
+        <p>Canvas is not supported in your browser</p>
+    </canvas>
+    <br />
+    <input type="button" onclick="StartAnimation()" value="Start Animation" />
+    <input type="button" onclick="StopAnimation()" value="Stop Animation" />
+    <input type="button" onclick="ResetCanvas()" value="Reset" />
+</body>
+</html>
+
